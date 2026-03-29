@@ -12,8 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('groups', function (Blueprint $table) {
+            Schema::create('groups', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->comment('اسم الدائرة مثل: حلقة التميز');
+            $table->foreignId('teacher_id')
+                  ->constrained('users')
+                  ->restrictOnDelete()
+                  ->comment('المدرس المسئول عن الدائرة');
+            $table->enum('category', ['religion', 'languages', 'study', 'quran', 'other'])
+                  ->default('quran')
+                  ->comment('نوع النشاط: دين / لغات / دراسة / قرآن');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
+        });
         });
     }
 
