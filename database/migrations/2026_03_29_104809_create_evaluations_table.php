@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             // منع تكرار نفس الامتحان لنفس الطالب في نفس المادة
-            $table->unique(['student_id', 'group_id', 'title'], 'student_eval_unique');
+            $table->unique(['student_id', 'group_id', 'title', 'evaluation_date'], 'student_eval_unique');
         });
     }
 

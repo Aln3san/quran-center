@@ -10,6 +10,8 @@ class Payment extends Model
 {
     use HasFactory;
 
+    protected $table = 'pay_ments';
+
     protected $fillable = [
         'student_id',
         'group_id',

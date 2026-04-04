@@ -25,7 +25,7 @@ return new class extends Migration
             $table->tinyInteger('month')
                 ->comment('الشهر 1-12');
             $table->year('year')->comment('السنة');
-            $table->enum('payment_method', ['cash', 'transfer'])
+            $table->enum('payment_method', ['cash', 'vodafone_cash'])
                 ->default('cash');
             $table->foreignId('received_by')
                 ->constrained('users')

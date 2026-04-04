@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\StudentProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -11,8 +12,10 @@ Route::prefix('V1')->group(function () {
 
     // ─── Public Routes (بدون توكن) ───────────────────────────────────────────────
     Route::post('/register',        [AuthController::class, 'register']);
-    Route::middleware('auth:sanctum')->post('/login',           [AuthController::class, 'login']);
-    Route::post('/password/forgot', [AuthController::class, 'forgotPassword']);
+    Route::post('/login',           [AuthController::class, 'login']);
+    Route::get('/profile/{id}',           [StudentProfileController::class, 'showProfile']);
+    Route::post('/update-profile',           [StudentProfileController::class, 'updateProfile']);
+    // Route::post('/password/forgot', [AuthController::class, 'forgotPassword']);
 
     // ─── Protected Routes (Bearer Token مطلوب) ───────────────────────────────────
     Route::middleware('auth:sanctum')->group(function () {
@@ -26,4 +29,8 @@ Route::prefix('V1')->group(function () {
         // Route::get('/posts',              [PostController::class, 'index']);
         // Route::get('/schedules',          [ScheduleController::class, 'index']);
     });
+});
+
+Route::get('/test-connection', function () {
+    return response()->json(['message' => 'Success! Connection is working.']);
 });
